@@ -3,13 +3,13 @@
 #include "myString.h"
 
 
-class Organismo 
+class Organismo
 {
 	private:
-	    MyString nombre;
-	    MyString especie;
-	    MyString historial;  
-	    
+	    myString nombre;
+	    myString especie;
+	    myString historial;
+
 	public:
 	    Organismo(const myString& n, const myString& e, const myString& h);
 	    myString getNombre() const;
