@@ -12,6 +12,24 @@ int aleatorio(int maximo) {
     return semilla % maximo;
 }
 
+int pasoAleatorio() {
+    return aleatorio(3) - 1;  // da -1, 0 o 1
+}
+
+void movimientoAleatorio(int &x, int &y) {
+    int dx = pasoAleatorio();
+    int dy = pasoAleatorio();
+
+    x += dx;
+    y += dy;
+
+    // Limitar dentro del mapa
+    if (x < 0) x = 0;
+    if (x >= FILAS) x = FILAS - 1;
+    if (y < 0) y = 0;
+    if (y >= COLUMNAS) y = COLUMNAS - 1;
+}
+
 
 class Organismo {
 public:
@@ -20,7 +38,9 @@ public:
     Organismo(int px = 0, int py = 0, int pvida = 5) : x(px), y(py), vida(pvida) {}
 
     virtual char simbolo() const = 0;
-    virtual void mover(int filas, int columnas) = 0;
+    virtual void mover() {
+        movimientoAleatorio(x, y);
+    }
     // virtual void comer() {}
     virtual void vivir() {
          vida--; 
@@ -34,7 +54,7 @@ class Vegetacion : public Organismo {
 public:
     Vegetacion(int px, int py) : Organismo(px, py, 4) {}
     char simbolo() const { return 'V'; }
-    void mover(int filas, int columnas) {}
+    
 
 };
 
@@ -42,21 +62,14 @@ class Presa : public Organismo {
 public:
     Presa(int px, int py) : Organismo(px, py, 6) {}
     char simbolo() const { return 'P'; }
-    void mover(int filas, int columnas) {
-    y++;
-    if (y >= columnas) y = 0;
-}
-
+    
 };
 
 class Depredador : public Organismo {
 public:
     Depredador(int px, int py) : Organismo(px, py, 8) {}
     char simbolo() const { return 'D'; }
-    void mover(int filas, int columnas) {
-    x++;
-    if (x >= filas) x = 0;
-}
+    
 
 };
 
@@ -65,9 +78,11 @@ private:
     Organismo* organismos[MAX_ORGANISMOS];
     int cantidad;
     char mapa[FILAS][COLUMNAS];
+    int dia;  // contador de días
+
 public:
-    Mundo() {
-        cantidad = 0;
+    Mundo() : cantidad(0), dia(0) {
+        // Inicializa el mapa vacío
         for (int i = 0; i < FILAS; i++)
             for (int j = 0; j < COLUMNAS; j++)
                 mapa[i][j] = '.';
@@ -79,36 +94,47 @@ public:
     }
 
     void actualizarMapa() {
+        // Limpia el mapa
         for (int i = 0; i < FILAS; i++)
             for (int j = 0; j < COLUMNAS; j++)
                 mapa[i][j] = '.';
 
+        // Coloca los organismos en sus posiciones
         for (int i = 0; i < cantidad; i++) {
             if (organismos[i]->estaVivo()) {
                 int x = organismos[i]->x;
                 int y = organismos[i]->y;
-                if (x >= 0 && x < FILAS && y >= 0 && y < COLUMNAS)
-                    mapa[x][y] = organismos[i]->simbolo();
+                mapa[x][y] = organismos[i]->simbolo();
             }
         }
     }
 
     void mostrar() {
         actualizarMapa();
+
+        cout << "DIA " << dia << endl;
+
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++)
                 cout << mapa[i][j] << " ";
             cout << endl;
         }
     }
+
     void avanzarDia() {
-    for (int i = 0; i < cantidad; i++) {
-        if (organismos[i]->estaVivo()) {
-            organismos[i]->mover(FILAS, COLUMNAS);
-            organismos[i]->vivir();
+        dia++; // incrementa el tiempo del mundo
+
+        for (int i = 0; i < cantidad; i++) {
+            if (organismos[i]->estaVivo()) {
+                organismos[i]->mover(); // movimiento aleatorio por ahora
+                organismos[i]->vivir(); // bajar vida
+            }
         }
     }
-}
+
+    int getDia() const {
+        return dia;
+    }
 };
 
 
@@ -130,4 +156,5 @@ int main() {
 
     return 0;
 }
+
 
