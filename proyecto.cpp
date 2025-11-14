@@ -78,13 +78,13 @@ private:
     Organismo* organismos[MAX_ORGANISMOS];
     int cantidad;
     char mapa[FILAS][COLUMNAS];
-    int dia;  // contador de días
+    int dia;  
 
 public:
     Mundo() : cantidad(0), dia(0) {
         // Inicializa el mapa vacío
-        for (int i = 0; i < FILAS; i++)
-            for (int j = 0; j < COLUMNAS; j++)
+        for (int i= 0;i < FILAS; i++)
+            for (int j= 0; j <COLUMNAS; j++)
                 mapa[i][j] = '.';
     }
 
@@ -100,7 +100,7 @@ public:
                 mapa[i][j] = '.';
 
         // Coloca los organismos en sus posiciones
-        for (int i = 0; i < cantidad; i++) {
+        for (int i =0;i< cantidad; i++) {
             if (organismos[i]->estaVivo()) {
                 int x = organismos[i]->x;
                 int y = organismos[i]->y;
@@ -124,10 +124,10 @@ public:
     void avanzarDia() {
         dia++; // incrementa el tiempo del mundo
 
-        for (int i = 0; i < cantidad; i++) {
+        for (int i= 0; i <cantidad; i++) {
             if (organismos[i]->estaVivo()) {
-                organismos[i]->mover(); // movimiento aleatorio por ahora
-                organismos[i]->vivir(); // bajar vida
+                organismos[i]->mover(); 
+                organismos[i]->vivir(); 
             }
         }
     }
@@ -141,20 +141,31 @@ public:
 int main() {
     Mundo mundo;
 
+    // Crear organismos
     Vegetacion v1(0, 0);
     Vegetacion v2(4, 4);
     Presa p1(1, 2);
     Depredador d1(3, 1);
 
+    // Agregar al mundo
     mundo.agregar(&v1);
     mundo.agregar(&v2);
     mundo.agregar(&p1);
     mundo.agregar(&d1);
 
-    cout << "MUNDO DE CHILL: " << endl;
+    cout << "ESTADO INICIAL DE CHILL:" << endl;
     mundo.mostrar();
+    cout << endl;
+
+    // Avanzar hasta el día 3
+    for (int i = 1; i <= 3; i++) {
+        mundo.avanzarDia();
+        cout << "\nLuego del dia " << i << ":" << endl;
+        mundo.mostrar();
+    }
 
     return 0;
 }
+
 
 
