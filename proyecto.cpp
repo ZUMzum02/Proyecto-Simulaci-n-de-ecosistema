@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
 
-const int FILAS = 5;
-const int COLUMNAS = 5;
+const int FILAS = 8;
+const int COLUMNAS = 8;
 const int MAX_ORGANISMOS = 10;
 
-// funcion de aleatoriedad 
-int semilla = 123; 
+// funcion de aleatoriedad
+int semilla = 123;
 int aleatorio(int maximo) {
     semilla = (semilla * 1103515245 + 12345) % 2147483648;
     return semilla % maximo;
@@ -35,26 +35,28 @@ class Organismo {
 public:
     int x, y;
     int vida;
-    Organismo(int px = 0, int py = 0, int pvida = 5) : x(px), y(py), vida(pvida) {}
+    Organismo(int px = 0, int py = 0, int pvida = 15) : x(px), y(py), vida(pvida) {}
 
     virtual char simbolo() const = 0;
     virtual void mover() {
         movimientoAleatorio(x, y);
     }
-    // virtual void comer() {}
+    virtual void comer(Organismo* otros[], int cantidad) {}
     virtual void vivir() {
-         vida--; 
+         vida--;
         }
-    bool estaVivo() const { 
-        return vida > 0; 
+    bool estaVivo() const {
+        return vida > 0;
     }
+
 };
 
 class Vegetacion : public Organismo {
 public:
     Vegetacion(int px, int py) : Organismo(px, py, 4) {}
     char simbolo() const { return 'V'; }
-    
+    void mover() override {
+    }
 
 };
 
@@ -62,23 +64,52 @@ class Presa : public Organismo {
 public:
     Presa(int px, int py) : Organismo(px, py, 6) {}
     char simbolo() const { return 'P'; }
-    
+    void mover() override {
+        movimientoAleatorio(x,y);
+    }
+    void comer(Organismo* otros[], int cantidad){
+        for (int i=0; i < cantidad;i++){
+            Vegetacion* v = dynamic_cast < Vegetacion*>(otros[i]);
+            if (v && v->estaVivo() &&
+            v->x == x && v->y == y)
+        {
+            vida += 3;
+            v->vida = 0;
+            return;
+        }
+    }
+    }
 };
 
 class Depredador : public Organismo {
 public:
     Depredador(int px, int py) : Organismo(px, py, 8) {}
     char simbolo() const { return 'D'; }
-    
+    void mover() override {
+        movimientoAleatorio(x,y);
+    }
+    void comer(Organismo* otros[], int cantidad){
+        for (int i=0; i < cantidad;i++){
+            Presa* p = dynamic_cast < Presa*>(otros[i]);
+            if (p && p->estaVivo() &&
+            p->x == x && p->y == y)
+        {
+            vida += 5;
+            p->vida = 0;
+            return;
+        }
+    }
+    }
 
 };
+
 
 class Mundo {
 private:
     Organismo* organismos[MAX_ORGANISMOS];
     int cantidad;
     char mapa[FILAS][COLUMNAS];
-    int dia;  
+    int dia;
 
 public:
     Mundo() : cantidad(0), dia(0) {
@@ -105,6 +136,7 @@ public:
                 int x = organismos[i]->x;
                 int y = organismos[i]->y;
                 mapa[x][y] = organismos[i]->simbolo();
+
             }
         }
     }
@@ -126,8 +158,9 @@ public:
 
         for (int i= 0; i <cantidad; i++) {
             if (organismos[i]->estaVivo()) {
-                organismos[i]->mover(); 
-                organismos[i]->vivir(); 
+                organismos[i]->mover();
+                organismos[i]->comer(organismos, cantidad);
+                organismos[i]->vivir();
             }
         }
     }
@@ -144,8 +177,8 @@ int main() {
     // Crear organismos
     Vegetacion v1(0, 0);
     Vegetacion v2(4, 4);
-    Presa p1(1, 2);
-    Depredador d1(3, 1);
+    Presa p1(3, 2);
+    Depredador d1(0, 2);
 
     // Agregar al mundo
     mundo.agregar(&v1);
@@ -166,6 +199,8 @@ int main() {
 
     return 0;
 }
+
+
 
 
 
