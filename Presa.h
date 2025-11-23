@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PRESA_H
+#define PRESA_H
 #include "Organismo.h"
 
 class Presa : public Organismo {
@@ -10,3 +11,4 @@ public:
     virtual void comer(Organismo* lista[], int cantidad) override;
     virtual void actualizar() override;
 };
+#endif
