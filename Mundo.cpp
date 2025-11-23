@@ -131,7 +131,7 @@ void Mundo::avanzarDia() {
         }
     }
 
-    // limpieza: remove dead from grid pointers
+   
     for (int i = 0; i < total; i++) {
         if (lista[i] && lista[i]->getVida() <= 0) {
             removerDeGrid(lista[i]);
