@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MUNDO_H
+#define MUNDO_H
 #include "Organismo.h"
 #include "Vegetacion.h"
 #include "Presa.h"
@@ -26,3 +27,4 @@ public:
     void avanzarDia();
     void mostrar() const;
 };
+#endif
