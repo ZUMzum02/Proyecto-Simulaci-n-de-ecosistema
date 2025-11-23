@@ -52,7 +52,7 @@ void Mundo::agregarOrganismo(Organismo* o) {
     colocarEnGrid(o);
 }
 
-// Helper: buscar casilla vecina libre alrededor (cx,cy)
+// buscar casilla vecina libre alrededor (cx,cy)
 bool buscarVecinaLibre(int cx, int cy, int filas, int columnas, Organismo*** grid, int &outX, int &outY) {
     const int dirs[4][2] = {{1,0},{-1,0},{0,1},{0,-1}};
     for (int k=0;k<4;k++) {
@@ -79,11 +79,8 @@ void Mundo::avanzarDia() {
         Organismo* o = lista[i];
         if (!o || !o->getVida()) continue;
         removerDeGrid(o);
-
-        // simple movement: random step (Mundo can be extended with BFS)
-        o->mover();
-
-        // clamp and place
+       o->mover();
+        
         if (!enRango(o->getX(), o->getY())) {
             // clamp to valid
             int nx = o->getX(); int ny = o->getY();
@@ -114,7 +111,7 @@ void Mundo::avanzarDia() {
             int dy = abs(a->getY() - b->getY());
             if (dx + dy != 1) continue;
 
-            // ensure cooldown zero
+           
             if (a->getCooldown() > 0 || b->getCooldown() > 0) continue;
 
             int outX=-1, outY=-1;
