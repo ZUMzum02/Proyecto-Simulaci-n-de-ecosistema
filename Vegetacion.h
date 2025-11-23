@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VEGETACION_H
+#define VEGETACION_H
 #include "Organismo.h"
 
 class Vegetacion : public Organismo {
@@ -13,3 +14,4 @@ public:
     virtual void actualizar() override;
     virtual bool esVegetacionActiva() const override;
 };
+#endif
