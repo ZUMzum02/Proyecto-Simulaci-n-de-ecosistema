@@ -22,7 +22,7 @@ void Presa::comer(Organismo* lista[], int cantidad) {
         if (v && v->esVegetacionActiva() && v->getX() == x && v->getY() == y) {
             v->consumir();
             vida += 3;
-            cooldown = 3; // cooldown after eating
+            cooldown = 3; 
             return;
         }
     }
