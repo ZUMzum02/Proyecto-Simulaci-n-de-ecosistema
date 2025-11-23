@@ -8,7 +8,7 @@ Presa::~Presa() {}
 char Presa::simbolo() const { return 'P'; }
 
 void Presa::mover() {
-    // movement delegated to Mundo; fallback random step
+    
     int dx = pasoAleatorio(); int dy = pasoAleatorio();
     int nx = x + dx; int ny = y + dy;
     if (nx < 0) nx = 0; if (nx >= 8) nx = 7;
