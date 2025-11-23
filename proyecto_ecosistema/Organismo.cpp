@@ -1,0 +1,20 @@
+#include "Organismo.h"
+
+Organismo::Organismo(int px, int py, int pvida)
+    : x(px), y(py), vida(pvida), cooldown(0) {}
+
+Organismo::~Organismo() {}
+
+int Organismo::getX() const { return x; }
+int Organismo::getY() const { return y; }
+int Organismo::getVida() const { return vida; }
+int Organismo::getCooldown() const { return cooldown; }
+
+void Organismo::setPos(int nx, int ny) { x = nx; y = ny; }
+void Organismo::setVida(int v) { vida = v; }
+void Organismo::setCooldown(int c) { cooldown = c; }
+
+void Organismo::mover() { /* default: no-op, Mundo decides movement */ }
+void Organismo::comer(Organismo* lista[], int cantidad) { (void)lista; (void)cantidad; }
+void Organismo::actualizar() { if (cooldown>0) cooldown--; vida--; }
+bool Organismo::esVegetacionActiva() const { return false; }
