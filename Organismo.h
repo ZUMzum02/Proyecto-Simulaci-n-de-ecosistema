@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ORGANISMO_H
+#define ORGANISMO_H
 
 class DatosOrganismo; // forward
 
@@ -29,3 +30,4 @@ public:
     bool estaVivo() const { return vida > 0; }
 
 };
+#endif
