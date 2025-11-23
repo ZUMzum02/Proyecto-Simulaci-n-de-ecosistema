@@ -14,7 +14,7 @@ void Organismo::setPos(int nx, int ny) { x = nx; y = ny; }
 void Organismo::setVida(int v) { vida = v; }
 void Organismo::setCooldown(int c) { cooldown = c; }
 
-void Organismo::mover() { /* default: no-op, Mundo decides movement */ }
+void Organismo::mover() {  }
 void Organismo::comer(Organismo* lista[], int cantidad) { (void)lista; (void)cantidad; }
 void Organismo::actualizar() { if (cooldown>0) cooldown--; vida--; }
 bool Organismo::esVegetacionActiva() const { return false; }
