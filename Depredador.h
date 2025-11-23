@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DEPREDADOR_H
+#define DEPREDADOR_H
 #include "Organismo.h"
 
 class Depredador : public Organismo {
@@ -10,3 +11,4 @@ public:
     virtual void comer(Organismo* lista[], int cantidad) override;
     virtual void actualizar() override;
 };
+#endif
