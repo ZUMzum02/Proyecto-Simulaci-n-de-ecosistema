@@ -1,5 +1,4 @@
-#include "myString.h"  
-
+#include "myString.h"
 
 int myString::calculateLength(const char* str) const {
     int len = 0;
@@ -9,16 +8,14 @@ int myString::calculateLength(const char* str) const {
     return len;
 }
 
-
 void myString::copyString(char* dest, const char* src) const {
     int i = 0;
     while (src && src[i] != '\0') {
         dest[i] = src[i];
         ++i;
     }
-    dest[i] = '\0';  
+    dest[i] = '\0';
 }
-
 
 myString::myString(const char* str) {
     if (str) {
@@ -31,9 +28,7 @@ myString::myString(const char* str) {
     }
 }
 
-
 myString::myString() : size(0), data(nullptr) {}
-
 
 myString::myString(const myString& other) {
     size = other.size;
@@ -45,23 +40,14 @@ myString::myString(const myString& other) {
     }
 }
 
-
-
-
-
 int myString::getSize() const {
     return size;
 }
-
 
 const char* myString::getData() const {
     return data ? data : "";
 }
 
-
-
 myString::~myString() {
-
     delete[] data;
 }
-
