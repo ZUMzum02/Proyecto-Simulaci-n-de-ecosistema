@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MYSTRING_H
+#define MYSTRING_H
+
 
 class myString 
 {
@@ -17,3 +19,4 @@ class myString
         int getSize() const;
         const char* getData() const;
 };
+#endif
