@@ -40,6 +40,23 @@ myString::myString(const myString& other) {
     }
 }
 
+bool myString::operator==(const char* str) const
+{
+    int len = 0;
+    while (str[len] != '\0')
+        len++;
+
+    if (size != len)
+        return false;
+
+    for (int i = 0; i < size; i++) {
+        if (data[i] != str[i])
+            return false;
+    }
+    return true;
+}
+
+
 int myString::getSize() const {
     return size;
 }

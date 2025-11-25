@@ -2,7 +2,14 @@
 #include "Presa.h"
 #include "Utils.h"
 
-Depredador::Depredador(int px, int py) : Organismo(px, py, 8) {}
+Depredador::Depredador(int px, int py)
+    : Organismo(px, py, 8)
+{
+    especie = myString("Depredador");
+    habitat = myString("Selva");
+    nivelAmenaza = 3;
+}
+
 Depredador::~Depredador() {}
 
 char Depredador::simbolo() const { return 'D'; }
