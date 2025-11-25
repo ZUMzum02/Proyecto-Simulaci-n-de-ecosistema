@@ -12,6 +12,6 @@ public:
     virtual char simbolo() const override;
     void consumir();
     virtual void actualizar() override;
-    virtual bool esVegetacionActiva() const override;
+    bool esVegetacionActiva() const override;
 };
 #endif
