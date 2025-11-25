@@ -26,7 +26,6 @@ public:
     virtual void mover();
     virtual void comer(Organismo* lista[], int cantidad);
     virtual void actualizar();
-    virtual bool esVegetacionActiva() const;
     bool estaVivo() const { return vida > 0; }
 
 };
