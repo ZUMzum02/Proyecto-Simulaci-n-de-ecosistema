@@ -1,139 +1,62 @@
 #include <iostream>
-#include <cstring>
-using namespace std;
+#include "menu.h"
 
-class Interfaz {
-public:
-
-    // ==================================================================
-    // Imprime una línea dentro del marco ****** ... ******
-    // ==================================================================
-    static void imprimirLinea(const char contenido[]) {
-        int total = 76; 
-        int longitud = strlen(contenido);
-        int espacios = total - longitud;
-        if (espacios < 0) espacios = 0;
-
-        cout << "****** " << contenido;
-        for (int i = 0; i < espacios; i++) cout << " ";
-        cout << " ******\n";
-    }
-
-    // ==================================================================
-    // Muestra el menú dentro del marco ASCII
-    // ==================================================================
-    static void mostrar(const char* opciones[], int cantidad, const char titulo[]) {
-        system("clear"); // o system("cls") en Windows
-
-        cout << "   /***********\n\n";
-        cout << "************************************************************************************\n";
-        cout << "************************************************************************************\n";
-
-        imprimirLinea(" ");
-        imprimirLinea(titulo);
-        imprimirLinea(" ");
-
-        for (int i = 0; i < cantidad; i++) {
-            char linea[120] = "";
-            char num[10];
-
-            sprintf(num, "[%d] ", i + 1);
-            strcat(linea, num);
-            strcat(linea, opciones[i]);
-
-            imprimirLinea(linea);
-            imprimirLinea(" ");
-        }
-
-        cout << "************************************************************************************\n";
-        cout << "************************************************************************************\n";
-    }
-
-    // ==================================================================
-    // Leer opción ingresada
-    // ==================================================================
-    static int leerOpcion(int max) {
-        int op;
-        cout << "\nSeleccione una opcion: ";
-        cin >> op;
-        return op;
-    }
-};
-
-// ======================================================================
-//              MENÚS ANIDADOS (USANDO SOLO ARRAYS)
-// ======================================================================
-
-void menuOrganismos();
-
-// ---------------------------- MENÚ PRINCIPAL ---------------------------
-void menuPrincipal() {
-    const char* opciones[] = {
-        "Organismos",
-        "Estadisticas",
-        "Configuracion",
-        "Salir"
-    };
-    int n = 4;
-
-    while (true) {
-        Interfaz::mostrar(opciones, n, "MENU PRINCIPAL");
-        int op = Interfaz::leerOpcion(n);
-
-        switch (op) {
-            case 1: menuOrganismos(); break;
-            case 2:
-                cout << "Mostrando estadisticas...\n";
-                cin.get(); cin.get();
-                break;
-            case 3:
-                cout << "Configuracion...\n";
-                cin.get(); cin.get();
-                break;
-            case 4:
-                exit(0);
-        }
-    }
+Menu::Menu(Mundo& mundo) : db(mundo)
+{
+   
 }
 
-// ---------------------------- MENÚ ORGANISMOS --------------------------
-void menuOrganismos() {
-    const char* opciones[] = {
-        "Listar todos",
-        "Buscar organismo",
-        "Historial",
-        "Volver"
-    };
-    int n = 4;
 
-    while (true) {
-        Interfaz::mostrar(opciones, n, "MENU ORGANISMOS");
-        int op = Interfaz::leerOpcion(n);
 
-        switch (op) {
-            case 1:
-                cout << "Listando organismos...\n";
-                cin.get(); cin.get();
-                break;
-            case 2:
-                cout << "Buscando organismo...\n";
-                cin.get(); cin.get();
-                break;
-            case 3:
-                cout << "Mostrando historial...\n";
-                cin.get(); cin.get();
-                break;
-            case 4:
-                return; // volver al menú principal
-        }
-    }
+void Menu::mostrarMenu() const{
+
+    std::cout<<"**************************************************"<<std::endl;
+    std::cout<<"**           SISTEMA DE RESERVA                 **"<<std::endl;
+    std::cout<<"**           NATURAL ECOMUNDO                   **"<<std::endl;
+    std::cout<<"**           ================                   **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**      [1] Mostrar datos organismos            **"<<std::endl;
+    std::cout<<"**      [2] Inspeccionar Organismo              **"<<std::endl;
+    std::cout<<"**      [3] Historial Organismo                 **"<<std::endl;
+    std::cout<<"**      [4] Salir                               **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**                                              **"<<std::endl;
+    std::cout<<"**************************************************"<<std::endl;
 }
 
-// ======================================================================
-//                                   MAIN
-// ======================================================================
-int main() {
-    menuPrincipal();
-    return 0;
+void Menu::ejecutarOpcion(int opcion) {
+
+     if(opcion==2){
+        
+        
+	    db.agregarOrganismo(new Vegetacion(0,0));
+	    db.agregarOrganismo(new Vegetacion(4,4));
+	    db.agregarOrganismo(new Vegetacion(7,7));
+
+	    db.agregarOrganismo(new Presa(3,2));
+	    db.agregarOrganismo(new Presa(3,3));
+
+	    db.agregarOrganismo(new Depredador(0,2));
+
+	    std::cout << "ESTADO INICIAL:\n";
+	    db.mostrar();
+
+	    for (int d = 1; d <= 10; d++) {
+		std::cout << "\n--- Día " << d << " ---\n";
+		db.avanzarDia();
+		db.mostrar();
+	    }
+            return ;
+     }
+
+
 }
 

@@ -6,10 +6,19 @@
 #include "Presa.h"
 #include "Depredador.h"
 #include "Mundo.h"
+#include "menu.h"
 
 int main() {
-    Mundo mundo(8,8);
 
+    
+    Mundo mundo(8,8);
+    Menu menu(mundo);
+    menu.mostrarMenu();
+    
+    int op; std::cin>>op;
+    menu.ejecutarOpcion(op);
+    
+    /*****
     mundo.agregarOrganismo(new Vegetacion(0,0));
     mundo.agregarOrganismo(new Vegetacion(4,4));
     mundo.agregarOrganismo(new Vegetacion(7,7));
@@ -27,6 +36,7 @@ int main() {
         mundo.avanzarDia();
         mundo.mostrar();
     }
-
+    ****/
+    
     return 0;
 }
