@@ -50,7 +50,7 @@ void Menu::ejecutarOpcion(int opcion) {
 	    db.mostrar();
 
 	    for (int d = 1; d <= 10; d++) {
-		std::cout << "\n--- Día " << d << " ---\n";
+		std::cout << "\n--- Dia " << d << " ---\n";
 		db.avanzarDia();
 		db.mostrar();
 	    }
