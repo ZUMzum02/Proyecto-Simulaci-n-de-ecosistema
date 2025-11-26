@@ -3,17 +3,16 @@
 #include "Mundo.h"
 
 
-class Menu 
+class Menu
 {
 	private:
-	
-	    Mundo& db;  
+
+	    Mundo& db;
 	public:
-	
-	    Menu(Mundo& database);
+
+	    Menu(Mundo&  mundo);
 	    void mostrarMenu() const;
 	    void ejecutarOpcion(int opcion);
-	    void iniciar();  
+	   //void iniciar();
 };
 #endif
-

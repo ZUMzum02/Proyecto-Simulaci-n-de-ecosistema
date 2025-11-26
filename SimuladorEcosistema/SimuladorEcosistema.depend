@@ -1,0 +1,68 @@
+# depslib dependency file v1.0
+1764160154 source:d:\simuladorecosistema\main.cpp
+	<iostream>
+	"Utils.h"
+	"myString.h"
+	"Organismo.h"
+	"Vegetacion.h"
+	"Presa.h"
+	"Depredador.h"
+	"Mundo.h"
+	"menu.h"
+
+1764160117 d:\simuladorecosistema\include\utils.h
+
+1764160249 d:\simuladorecosistema\include\mystring.h
+
+1764160049 d:\simuladorecosistema\include\organismo.h
+	"myString.h"
+
+1764160139 d:\simuladorecosistema\include\vegetacion.h
+	"Organismo.h"
+
+1764160079 d:\simuladorecosistema\include\presa.h
+	"Organismo.h"
+
+1764159993 d:\simuladorecosistema\include\depredador.h
+	"Organismo.h"
+
+1764160023 d:\simuladorecosistema\include\mundo.h
+	"Organismo.h"
+	"Vegetacion.h"
+	"Presa.h"
+	"Depredador.h"
+
+1764160188 d:\simuladorecosistema\include\menu.h
+	"Mundo.h"
+
+1764159992 source:d:\simuladorecosistema\src\depredador.cpp
+	"Depredador.h"
+	"Presa.h"
+	"Utils.h"
+
+1764160184 source:d:\simuladorecosistema\src\menu.cpp
+	<iostream>
+	"menu.h"
+
+1764160013 source:d:\simuladorecosistema\src\mundo.cpp
+	"Mundo.h"
+	"Utils.h"
+	<iostream>
+
+1764160246 source:d:\simuladorecosistema\src\mystring.cpp
+	"myString.h"
+
+1764160051 source:d:\simuladorecosistema\src\organismo.cpp
+	"Organismo.h"
+
+1764160076 source:d:\simuladorecosistema\src\presa.cpp
+	"Presa.h"
+	"Vegetacion.h"
+	"Utils.h"
+
+1764160104 source:d:\simuladorecosistema\src\utils.cpp
+	"Utils.h"
+
+1764160140 source:d:\simuladorecosistema\src\vegetacion.cpp
+	"Vegetacion.h"
+
