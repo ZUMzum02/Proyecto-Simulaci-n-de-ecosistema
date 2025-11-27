@@ -34,6 +34,10 @@ void Menu::mostrarMenu() const{
 
 void Menu::ejecutarOpcion(int opcion) {
 
+    
+
+
+
      if(opcion==2){
         
         
@@ -48,13 +52,31 @@ void Menu::ejecutarOpcion(int opcion) {
 
 	    std::cout << "ESTADO INICIAL:\n";
 	    db.mostrar();
-
+           
+            std::string command; 
+            
+            /****
 	    for (int d = 1; d <= 10; d++) {
 		std::cout << "\n--- Día " << d << " ---\n";
 		db.avanzarDia();
 		db.mostrar();
 	    }
             return ;
+            *///
+            while (true) {
+            std::cout << "\nPresiona ENTER para avanzar un día";
+            std::cout << " (o escribe 'salir' para volver al menú): ";
+            std::cin>>command;
+
+            if (command == "salir" || command == "SALIR") {
+                std::cout << "Regresando al menú...\n";
+                break;
+            }
+
+            db.avanzarDia();
+            db.mostrar();
+        }
+
      }
 
 

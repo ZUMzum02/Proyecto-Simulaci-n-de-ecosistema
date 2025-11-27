@@ -140,6 +140,7 @@ void Mundo::avanzarDia() {
 }
 
 void Mundo::mostrar() const {
+    /****
     char mapa[8][8];
     for (int i=0;i<filas;i++) for (int j=0;j<columnas;j++) mapa[i][j]='.';
     for (int i=0;i<total;i++) {
@@ -153,4 +154,54 @@ void Mundo::mostrar() const {
         for (int c=0;c<columnas;c++) std::cout << mapa[r][c] << ' ';
         std::cout << '\n';
     }
+    ***/
+    char mapa[8][8];
+
+    // Inicializar mapa con '.'
+    for (int i = 0; i < filas; i++)
+        for (int j = 0; j < columnas; j++)
+            mapa[i][j] = '.';
+
+    // Colocar organismos
+    for (int i = 0; i < total; i++) {
+        Organismo* o = lista[i];
+        if (!o || o->getVida() <= 0) continue;
+
+        int x = o->getX(), y = o->getY();
+        if (x >= 0 && x < filas && y >= 0 && y < columnas)
+            mapa[x][y] = o->simbolo();
+    }
+
+    // ====== MARCO DEL MENU ======
+    std::cout << "**************************************************\n";
+    std::cout << "**           SISTEMA DE RESERVA                 **\n";
+    std::cout << "**           NATURAL ECOMUNDO                   **\n";
+    std::cout << "**           ================                   **\n";
+    std::cout << "**                                              **\n";
+    std::cout << "**              SIMULACION DEL MUNDO            **\n";
+    std::cout << "**                                              **\n";
+
+    // Mostrar día (sin usar iomanip)
+    std::string dstr = std::to_string(dia);
+    std::cout << "**   DIA " << dstr;
+
+    int usados = 8 + dstr.size(); // letras ya impresas
+    int totalEsp = 46;
+    for (int i = usados; i < totalEsp; i++) std::cout << " ";
+    std::cout << "**\n";
+
+    // Imprimir mapa dentro del marco
+    for (int r = 0; r < filas; r++) {
+        std::cout << "**   ";
+        for (int c = 0; c < columnas; c++)
+            std::cout << mapa[r][c] << ' ';
+
+        int usadosFila = 4 + columnas * 2;
+        for (int i = usadosFila; i < totalEsp; i++) std::cout << " ";
+
+        std::cout << "**\n";
+    }
+
+    std::cout << "**                                              **\n";
+    std::cout << "**************************************************\n";
 }
