@@ -6,8 +6,6 @@ Menu::Menu(Mundo& mundo) : db(mundo)
 
 }
 
-
-
 void Menu::mostrarMenu() const{
 
     std::cout<<"**************************************************"<<std::endl;
@@ -33,29 +31,171 @@ void Menu::mostrarMenu() const{
 }
 
 void Menu::ejecutarOpcion(int opcion) {
+      if (opcion == 1) {
+	    const int ancho = 62; // marco grande
+	    auto linea = [&]() {
+		for (int i = 0; i < ancho; i++) std::cout << "*";
+		std::cout << "\n";
+	    };
+
+	    linea();
+	    std::cout << "**    SISTEMA DE RESERVA - DATOS ORGANISMOS (PRINCIPALES)   **";
+	    for (int i = 0; i < ancho - 51; i++) std::cout << " ";
+	    std::cout << "\n";
+	    linea();
+
+	    std::cout << "**";
+	    for (int i = 0; i < ancho - 4; i++) std::cout << " ";
+	    std::cout << "**\n";
+
+	    std::cout << "**  +---------------------------------+                     **\n";
+	    std::cout << "**  | TIPO       | POSICION | VIDA    |                     **\n";
+	    std::cout << "**  +---------------------------------+                     **\n";
+
+	    for (int i = 0; i < db.totalOrganismos(); i++) {
+
+		Organismo* o = db.getOrganismo(i);
+		if (!o || !o->estaVivo()) continue;
+
+		char s = o->simbolo();
+		if (s != 'P' && s != 'D') continue;  // solo presas y depredadores
+
+		std::cout << "**   | ";
+
+		if (s == 'P') std::cout << "PRESA      ";
+		else          std::cout << "DEPREDADOR ";
+
+		// Posición
+		std::cout << "| (" << o->getX() << "," << o->getY() << ")    ";
+
+		// Vida
+		std::cout << "| " << o->getVida() << "    ";
+
+
+
+		std::cout << "|                      **\n";
+	    }
+
+	    std::cout << "**  +--------------------------------+                      **\n";
+
+	    std::cout << "**";
+	    for (int i = 0; i < ancho - 4; i++) std::cout << " ";
+	    std::cout << "**\n";
+
+	    std::cout << "**                   [ENTER PARA VOLVER]                    **\n";
+
+	    linea();
+
+	    std::cin.ignore();
+	    std::cin.get();
+
+            return;
+    }
+
 
      if(opcion==2){
 
 
-	    db.agregarOrganismo(new Vegetacion(0,0));
-	    db.agregarOrganismo(new Vegetacion(4,4));
-	    db.agregarOrganismo(new Vegetacion(7,7));
+	     std::cout << "ESTADO INICIAL DEL MUNDO:\n";
+             db.mostrar();
 
-	    db.agregarOrganismo(new Presa(3,2));
-	    db.agregarOrganismo(new Presa(3,3));
+             std::string command;
 
-	    db.agregarOrganismo(new Depredador(0,2));
+	    while (true) {
+		std::cout << "\nPresiona ENTER para avanzar un dia";
+		std::cout << " (o escribe 'salir' para volver al menu): ";
 
-	    std::cout << "ESTADO INICIAL:\n";
-	    db.mostrar();
+		std::getline(std::cin, command);  // permite ENTER vacío
 
-	    for (int d = 1; d <= 10; d++) {
-		std::cout << "\n--- Dia " << d << " ---\n";
-		db.avanzarDia();
-		db.mostrar();
-	    }
-            return ;
+		if (command == "salir" || command == "SALIR") {
+		    std::cout << "Regresando al menu...\n";
+		    break;
+		}
+                db.avanzarDia();
+                db.mostrar();
+           }
+
      }
 
+
+     if(opcion==3){
+
+        std::cout << "**************************************************************\n";
+	    std::cout << "**                 SISTEMA DE RESERVA - HISTORIAL          **\n";
+	    std::cout << "**************************************************************\n\n";
+
+	    int total = db.totalOrganismos();
+
+	    std::cout << "Ingrese el ID del organismo (0 - " << total - 1 << "): ";
+	    int id;
+	    std::cin >> id;
+	    std::cin.ignore();
+
+	    if (id < 0 || id >= total) {
+		std::cout << "\n Organismo no valido.\n";
+		std::cout << " [ENTER PARA VOLVER]";
+		std::cin.get();
+		return;
+	    }
+
+	    Organismo* o = db.getOrganismo(id);
+
+	    if (!o) {
+		std::cout << "\n Organismo no valido.\n";
+		std::cout << " [ENTER PARA VOLVER]";
+		std::cin.get();
+		return;
+	    }
+
+	    std::cout << "\n**************************************************************\n";
+	    std::cout << "**                     DATOS DEL ORGANISMO                 **\n";
+	    std::cout << "**************************************************************\n\n";
+
+	    std::cout << "  ID             : " << id << "\n";
+	    std::cout << "  TIPO           : "
+		      << (o->simbolo() == 'P' ? "PRESA" :
+		         o->simbolo() == 'D' ? "DEPREDADOR" : "VEGETACION")
+		      << "\n";
+
+	    std::cout << "  ESPECIE        : " << o->getEspecie().getData() << "\n";
+	    std::cout << "  HABITAT        : " << o->getHabitat().getData() << "\n";
+	    std::cout << "  POSICION       : (" << o->getX() << " , " << o->getY() << ")\n";
+	    std::cout << "  VIDA ACTUAL    : " << o->getVida() << "\n";
+	    std::cout << "  NIVEL AMENAZA  : " << o->getNivel() << "\n";
+	    std::cout << "  COOLDOWN       : " << o->getCooldown() << " turnos\n";
+	    std::cout << "  ESTADO         : " << (o->estaVivo() ? "VIVO" : "MUERTO") << "\n";
+
+	    std::cout << "\n**************************************************************\n";
+	    std::cout << " [ENTER PARA VOLVER]";
+	    std::cin.get();
+
+	    return;
+
+     }
+
+     if(opcion==4){
+
+        std::cout<<"**************************************************"<<std::endl;
+	    std::cout<<"**           SISTEMA DE RESERVA                 **"<<std::endl;
+	    std::cout<<"**           NATURAL ECOMUNDO                   **"<<std::endl;
+	    std::cout<<"**           ================                   **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**      Gracias                                 **"<<std::endl;
+	    std::cout<<"**      por                                     **"<<std::endl;
+	    std::cout<<"**      su                                      **"<<std::endl;
+	    std::cout<<"**      visita                                  **"<<std::endl;
+	    std::cout<<"**      !!!!!!!!!!!                             **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**                                              **"<<std::endl;
+	    std::cout<<"**************************************************"<<std::endl;
+
+     }
 
 }

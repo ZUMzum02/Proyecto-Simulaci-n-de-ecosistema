@@ -15,9 +15,16 @@ class myString
         myString();
         bool operator==(const char* str) const;
         myString(const myString& other);
+        myString& operator=(const myString& other);
         virtual ~myString();
 
         int getSize() const;
         const char* getData() const;
+
+
 };
+
+
+
+
 #endif

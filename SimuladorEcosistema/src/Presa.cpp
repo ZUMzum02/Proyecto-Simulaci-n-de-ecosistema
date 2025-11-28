@@ -2,20 +2,18 @@
 #include "Vegetacion.h"
 #include "Utils.h"
 
-Presa::Presa(int px, int py)
-    : Organismo(px, py, 6)
-{
-    especie = myString("Presa");
-    habitat = myString("Sabana");
-    nivelAmenaza = 1;
-}
+Presa::Presa(int px, int py,
+             myString especie,
+             myString habitat,
+             int nivel,
+             int vidaInicial)
+    : Organismo(px, py, vidaInicial, especie, habitat, nivel){}
 
 Presa::~Presa() {}
 
 char Presa::simbolo() const { return 'P'; }
 
 void Presa::mover() {
-
     int dx = pasoAleatorio(); int dy = pasoAleatorio();
     int nx = x + dx; int ny = y + dy;
     if (nx < 0) nx = 0; if (nx >= 8) nx = 7;

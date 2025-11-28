@@ -5,11 +5,8 @@ const int REGEN_DIAS = 4;
 Vegetacion::Vegetacion(int px, int py)
     : Organismo(px, py, 1), activa(true), diasParaRegen(0)
 {
-    especie = myString("Vegetacion");
-    habitat = myString("Bosque");
-    nivelAmenaza = 0;
-}
 
+}
 
 Vegetacion::~Vegetacion() {}
 

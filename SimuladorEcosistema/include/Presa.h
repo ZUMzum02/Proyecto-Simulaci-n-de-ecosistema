@@ -4,7 +4,12 @@
 
 class Presa : public Organismo {
 public:
-    Presa(int px = 0, int py = 0);
+     Presa(int px = 0, int py = 0,
+          myString especie = "Presa",
+          myString habitat = "Desconocido",
+          int nivel = 1,
+          int vidaInicial = 50);
+
     virtual ~Presa();
     virtual char simbolo() const override;
     virtual void mover() override;

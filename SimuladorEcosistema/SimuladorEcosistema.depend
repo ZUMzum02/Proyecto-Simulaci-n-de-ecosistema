@@ -133,3 +133,72 @@
 1764160140 source:d:\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\vegetacion.cpp
 	"Vegetacion.h"
 
+1764328548 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\main.cpp
+	<iostream>
+	"Utils.h"
+	"myString.h"
+	"Organismo.h"
+	"Vegetacion.h"
+	"Presa.h"
+	"Depredador.h"
+	"Mundo.h"
+	"menu.h"
+
+1764327956 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\utils.h
+
+1764328039 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\mystring.h
+
+1764328823 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\organismo.h
+	"myString.h"
+
+1764327968 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\vegetacion.h
+	"Organismo.h"
+
+1764327939 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\presa.h
+	"Organismo.h"
+
+1764327879 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\depredador.h
+	"Organismo.h"
+
+1764327905 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\mundo.h
+	"Organismo.h"
+	"Vegetacion.h"
+	"Presa.h"
+	"Depredador.h"
+	"myString.h"
+
+1764328815 e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\include\menu.h
+	"Mundo.h"
+	"myString.h"
+
+1764327870 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\depredador.cpp
+	"Depredador.h"
+	"Presa.h"
+	"Utils.h"
+
+1764328727 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\menu.cpp
+	<iostream>
+	"menu.h"
+
+1764328349 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\mundo.cpp
+	"Mundo.h"
+	"Utils.h"
+	<iostream>
+
+1764328304 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\mystring.cpp
+	"myString.h"
+
+1764328250 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\organismo.cpp
+	"Organismo.h"
+
+1764328234 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\presa.cpp
+	"Presa.h"
+	"Vegetacion.h"
+	"Utils.h"
+
+1764327950 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\utils.cpp
+	"Utils.h"
+
+1764328213 source:e:\programación\proyecto-simulaci-n-de-ecosistema\simuladorecosistema\src\vegetacion.cpp
+	"Vegetacion.h"
+

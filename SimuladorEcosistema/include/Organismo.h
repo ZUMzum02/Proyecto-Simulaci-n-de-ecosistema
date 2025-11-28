@@ -2,8 +2,6 @@
 #define ORGANISMO_H
 #include "myString.h"
 
-class DatosOrganismo; // forward
-
 class Organismo {
 protected:
     int x, y;
@@ -14,7 +12,10 @@ protected:
     int nivelAmenaza;
 
 public:
-    Organismo(int px = 0, int py = 0, int pvida = 1);
+     Organismo(int px = 0, int py = 0, int pvida = 1,
+              myString pespecie = "Desconocida", myString phabitat = "Desconocido", int nivel=0 );
+
+
     virtual ~Organismo();
 
     int getX() const;

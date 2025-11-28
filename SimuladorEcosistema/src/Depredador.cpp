@@ -2,13 +2,12 @@
 #include "Presa.h"
 #include "Utils.h"
 
-Depredador::Depredador(int px, int py)
-    : Organismo(px, py, 8)
-{
-    especie = myString("Depredador");
-    habitat = myString("Selva");
-    nivelAmenaza = 3;
-}
+Depredador::Depredador(int px, int py,
+             myString especie,
+             myString habitat,
+             int nivel,
+             int vidaInicial)
+    : Organismo(px, py, vidaInicial, especie, habitat, nivel){}
 
 Depredador::~Depredador() {}
 
