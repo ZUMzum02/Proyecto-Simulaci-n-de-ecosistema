@@ -82,7 +82,6 @@ void Mundo::avanzarDia() {
        o->mover();
 
         if (!enRango(o->getX(), o->getY())) {
-            // clamp to valid
             int nx = o->getX(); int ny = o->getY();
             if (nx<0) nx=0; if (nx>=filas) nx=filas-1;
             if (ny<0) ny=0; if (ny>=columnas) ny=columnas-1;
@@ -100,7 +99,7 @@ void Mundo::avanzarDia() {
         o->actualizar();
     }
 
-    // reproducción por proximidad (presas/depredadores)
+    // reproducciÃ³n por proximidad (presas/depredadores)
     for (int i = 0; i < total; i++) {
         for (int j = i+1; j < total; j++) {
             Organismo* a = lista[i]; Organismo* b = lista[j];
