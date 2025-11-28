@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 #include "Mundo.h"
+#include "myString.h"
 
 
 class Menu 

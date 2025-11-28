@@ -1,8 +1,14 @@
 #include "Organismo.h"
 
-Organismo::Organismo(int px, int py, int pvida)
-    : x(px), y(py), vida(pvida), cooldown(0),
-      especie(""), habitat(""), nivelAmenaza(0) {}
+Organismo::Organismo(int px, int py, int pvida, myString pespecie, myString phabitat, int nivel)
+    : x(px),
+      y(py),
+      vida(pvida),
+      cooldown(0),
+      especie(pespecie),
+      habitat(phabitat),
+      nivelAmenaza(nivel) {}
+
 
 
 Organismo::~Organismo() {}

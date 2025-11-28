@@ -10,33 +10,42 @@
 
 int main() {
 
-    
+    /****
     Mundo mundo(8,8);
     Menu menu(mundo);
     menu.mostrarMenu();
     
     int op; std::cin>>op;
     menu.ejecutarOpcion(op);
+    ***/
     
-    /*****
-    mundo.agregarOrganismo(new Vegetacion(0,0));
-    mundo.agregarOrganismo(new Vegetacion(4,4));
-    mundo.agregarOrganismo(new Vegetacion(7,7));
+    Mundo mundo(8,8);
+    Menu menu(mundo);
 
-    mundo.agregarOrganismo(new Presa(3,2));
-    mundo.agregarOrganismo(new Presa(3,3));
+    int op;
 
-    mundo.agregarOrganismo(new Depredador(0,2));
+    while (true) {
 
-    std::cout << "ESTADO INICIAL:\n";
-    mundo.mostrar();
+        menu.mostrarMenu();
 
-    for (int d = 1; d <= 10; d++) {
-        std::cout << "\n--- Día " << d << " ---\n";
-        mundo.avanzarDia();
-        mundo.mostrar();
+        std::cout << "\nIngrese una opción: ";
+        std::cin >> op;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(9999, '\n');
+            std::cout << "Opción inválida.\n";
+            continue;
+        }
+
+        
+        if (op == 4) {
+            menu.ejecutarOpcion(op);  
+            break;                    
+        }
+
+        menu.ejecutarOpcion(op);      
     }
-    ****/
     
     return 0;
 }

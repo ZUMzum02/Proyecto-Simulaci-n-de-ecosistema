@@ -40,6 +40,24 @@ myString::myString(const myString& other) {
     }
 }
 
+myString& myString::operator=(const myString& other) {
+    if (this != &other) {
+
+        delete[] data; // liberar memoria previa
+
+        size = other.size;
+        if (size > 0) {
+            data = new char[size + 1];
+            copyString(data, other.data);
+        } else {
+            data = nullptr;
+        }
+    }
+    return *this;
+}
+
+
+
 bool myString::operator==(const char* str) const
 {
     int len = 0;
@@ -68,3 +86,8 @@ const char* myString::getData() const {
 myString::~myString() {
     delete[] data;
 }
+
+
+
+
+

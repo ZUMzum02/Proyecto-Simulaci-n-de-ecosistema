@@ -2,13 +2,44 @@
 #include "Utils.h"
 #include <iostream>
 
-Mundo::Mundo(int f, int c) : filas(f), columnas(c), total(0), capacity(64), dia(0) {
+Mundo::Mundo(int f, int c) : filas(f), columnas(c), total(0), capacity(25), dia(0) {
     grid = new Organismo**[filas];
     for (int i = 0; i < filas; i++) {
         grid[i] = new Organismo*[columnas];
         for (int j = 0; j < columnas; j++) grid[i][j] = nullptr;
     }
     lista = new Organismo*[capacity];
+    
+    
+	agregarOrganismo(new Presa(3, 4, "Conejo", "Bosque", 1, 40));
+	agregarOrganismo(new Presa(0, 1, "Ardilla", "Bosque", 1, 35));
+	agregarOrganismo(new Presa(2, 4, "Liebre", "Pradera", 2, 55));
+	agregarOrganismo(new Presa(6, 3, "Gacela", "Sabana", 3, 70));
+	agregarOrganismo(new Presa(3, 7, "Cuy", "Monte", 1, 40));
+	agregarOrganismo(new Presa(5, 1, "Perico", "Campo", 2, 60));
+	agregarOrganismo(new Presa(1, 5, "Raton", "Bosque", 2, 45));
+	agregarOrganismo(new Presa(4, 7, "Aguti", "Selva", 1, 38));
+	agregarOrganismo(new Presa(2, 0, "Rata", "Llanura", 2, 50));
+	agregarOrganismo(new Presa(6, 7, "Alce", "Bosque", 2, 65));
+        
+        agregarOrganismo(new Depredador(1, 1, "Lobo", "Bosque", 4, 80));
+	agregarOrganismo(new Depredador(3, 8, "Puma", "Monte", 5, 90));
+	agregarOrganismo(new Depredador(6, 2, "Zorro", "Tundra", 3, 60));
+	agregarOrganismo(new Depredador(2, 7, "Ocelote", "Selva", 4, 75));
+	agregarOrganismo(new Depredador(0, 4, "Halcon", "Monte", 5, 70));
+	agregarOrganismo(new Depredador(5, 0, "Tigre", "Selva", 6, 120));
+	agregarOrganismo(new Depredador(7, 3, "Coyote", "Desierto", 3, 65));
+	agregarOrganismo(new Depredador(4, 6, "Lince", "Bosque", 4, 88));
+	agregarOrganismo(new Depredador(6, 5, "Serpiente", "Selva", 2, 50));
+	agregarOrganismo(new Depredador(2, 1, "Aguila", "Monte", 5, 85));
+
+    
+    
+        agregarOrganismo(new Vegetacion(0,0));
+	agregarOrganismo(new Vegetacion(7,7));
+        agregarOrganismo(new Vegetacion(3,5));
+        agregarOrganismo(new Vegetacion(6,6));
+	agregarOrganismo(new Vegetacion(2,3));    
 }
 
 Mundo::~Mundo() {
@@ -44,6 +75,15 @@ void Mundo::removerDeGrid(Organismo* o) {
     int x = o->getX(), y = o->getY();
     if (!enRango(x, y)) return;
     if (grid[x][y] == o) grid[x][y] = nullptr;
+}
+
+Organismo* Mundo::getOrganismo(int i) const {
+    if (i >= 0 && i < total) return lista[i];
+    return nullptr;
+}
+
+int Mundo::totalOrganismos() const {
+    return total;
 }
 
 void Mundo::agregarOrganismo(Organismo* o) {
@@ -139,6 +179,18 @@ void Mundo::avanzarDia() {
     }
 }
 
+int contarDigitos(int n) {
+    if (n == 0) return 1;
+    int c = 0;
+    while (n > 0) {
+        n /= 10;
+        c++;
+    }
+    return c;
+}
+
+
+
 void Mundo::mostrar() const {
     /****
     char mapa[8][8];
@@ -181,14 +233,17 @@ void Mundo::mostrar() const {
     std::cout << "**              SIMULACION DEL MUNDO            **\n";
     std::cout << "**                                              **\n";
 
-    // Mostrar día (sin usar iomanip)
-    std::string dstr = std::to_string(dia);
-    std::cout << "**   DIA " << dstr;
+    std::cout << "**   DIA " << dia;
 
-    int usados = 8 + dstr.size(); // letras ya impresas
-    int totalEsp = 46;
-    for (int i = usados; i < totalEsp; i++) std::cout << " ";
-    std::cout << "**\n";
+   int usados = 8 + contarDigitos(dia);  
+   int totalEsp = 46;
+
+	// Rellenar espacios a la derecha
+	for (int i = usados; i < totalEsp; i++)
+	    std::cout << " ";
+
+	std::cout << " **\n";
+
 
     // Imprimir mapa dentro del marco
     for (int r = 0; r < filas; r++) {
@@ -199,7 +254,7 @@ void Mundo::mostrar() const {
         int usadosFila = 4 + columnas * 2;
         for (int i = usadosFila; i < totalEsp; i++) std::cout << " ";
 
-        std::cout << "**\n";
+        std::cout << " **\n";
     }
 
     std::cout << "**                                              **\n";

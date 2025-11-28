@@ -4,6 +4,7 @@
 #include "Vegetacion.h"
 #include "Presa.h"
 #include "Depredador.h"
+#include "myString.h"
 
 class Mundo {
 private:
@@ -22,7 +23,9 @@ private:
 public:
     Mundo(int filas = 8, int columnas = 8);
     ~Mundo();
-
+    
+    Organismo* getOrganismo(int i) const;
+    int totalOrganismos() const;
     void agregarOrganismo(Organismo* o);
     void avanzarDia();
     void mostrar() const;
